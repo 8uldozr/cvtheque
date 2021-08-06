@@ -22,7 +22,7 @@ class Cv
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="id_formation", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="id_cv", orphanRemoval=true)
      */
     private $id_formation;
 
@@ -76,22 +76,22 @@ class Cv
         return $this->id_formation;
     }
 
-    public function addIdFormation(Formation $idFormation): self
+    public function addIdFormation(Formation $id_cv): self
     {
-        if (!$this->id_formation->contains($idFormation)) {
-            $this->id_formation[] = $idFormation;
-            $idFormation->setIdFormation($this);
+        if (!$this->id_formation->contains($id_cv)) {
+            $this->id_formation[] = $id_cv;
+            $id_cv->setIdCv($this);
         }
 
         return $this;
     }
 
-    public function removeIdFormation(Formation $idFormation): self
+    public function removeIdFormation(Formation $id_cv): self
     {
-        if ($this->id_formation->removeElement($idFormation)) {
+        if ($this->id_formation->removeElement($id_cv)) {
             // set the owning side to null (unless already changed)
-            if ($idFormation->getIdFormation() === $this) {
-                $idFormation->setIdFormation(null);
+            if ($id_cv->getIdCv() === $this) {
+                $id_cv->setIdCv(null);
             }
         }
 
